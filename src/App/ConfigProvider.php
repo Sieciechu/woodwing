@@ -34,10 +34,15 @@ class ConfigProvider
         return [
             'invokables' => [
                 Handler\PingHandler::class => Handler\PingHandler::class,
+                Service\DistanceCalculator\InMemoryCalculator::class => Service\DistanceCalculator\InMemoryCalculator::class,
             ],
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                Handler\CalculateDistanceHandler::class => Handler\CalculateDistanceHandlerFactory::class,
             ],
+            'aliases' => [
+                Service\DistanceCalculator\Calculator::class => Service\DistanceCalculator\InMemoryCalculator::class,
+            ]
         ];
     }
 
