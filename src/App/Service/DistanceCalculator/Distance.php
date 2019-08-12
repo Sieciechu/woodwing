@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service\DistanceCalculator;
 
-final class Distance {
+final class Distance
+{
     /** @var float */
     private $value;
 
@@ -19,11 +20,11 @@ final class Distance {
 
     public static function createFromMeters(float $meters): self
     {
-        return new self($meters, new Unit(Unit::METERS));
+        return new self($meters, Unit::meter());
     }
 
     public static function createFromYards(float $yards): self
     {
-        return new self($yards, new Unit(Unit::YARDS));
+        return new self($yards, Unit::yard());
     }
 }

@@ -12,5 +12,5 @@ interface Calculator
      * @param Unit $resultUnit
      * @return Distance Sum of $a and $b . Distance unit is converted to $resultUnit
      */
-    function sum(Distance $a, Distance $b, Unit $resultUnit): Distance;
+    public function sum(Distance $a, Distance $b, Unit $resultUnit): Distance;
 }

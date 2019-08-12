@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\DistanceCalculator;
 
-
-class Unit
+final class Unit
 {
     const METERS = 'm';
     const YARDS = 'yd';
@@ -33,5 +32,15 @@ class Unit
         }
 
         $this->value = $unit;
+    }
+
+    public static function meter(): self
+    {
+        return new self(self::METERS);
+    }
+
+    public static function yard(): self
+    {
+        return new self(self::YARDS);
     }
 }
