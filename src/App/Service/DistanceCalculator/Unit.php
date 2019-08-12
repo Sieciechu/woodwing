@@ -34,6 +34,12 @@ final class Unit
         $this->value = $unit;
     }
 
+    public function __toString()
+    {
+        return $this->value;
+    }
+
+
     public static function meter(): self
     {
         return new self(self::METERS);

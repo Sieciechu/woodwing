@@ -14,6 +14,10 @@ class InMemoryCalculatorTest extends TestCase
     /**
      * @test
      * @dataProvider distanceProvider
+     * @param Distance $a
+     * @param Distance $b
+     * @param Unit $unitResult
+     * @param Distance $expectedDistance
      */
     public function sum(Distance $a, Distance $b, Unit $unitResult, Distance $expectedDistance)
     {

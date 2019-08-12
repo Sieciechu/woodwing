@@ -18,6 +18,16 @@ final class Distance
         $this->unit = $unit;
     }
 
+    public function getValue(): float
+    {
+        return $this->value;
+    }
+
+    public function getUnit(): Unit
+    {
+        return $this->unit;
+    }
+
     public static function createFromMeters(float $meters): self
     {
         return new self($meters, Unit::meter());
