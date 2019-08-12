@@ -23,6 +23,7 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             'templates'    => $this->getTemplates(),
+            'input_filter_specs' => $this->getInputFilterSpecs(),
         ];
     }
 
@@ -56,6 +57,26 @@ class ConfigProvider
                 'app'    => ['templates/app'],
                 'error'  => ['templates/error'],
                 'layout' => ['templates/layout'],
+            ],
+        ];
+    }
+
+    private function getInputFilterSpecs()
+    {
+        return  [
+            'queryDistanceCalculator' => [
+                [
+                    'name' => 'targetUnit',
+                    'required' => true,
+                    'allow_empty' => false,
+                    'continue_if_empty' => false,
+                ],
+                [
+                    'name' => 'query',
+                    'required' => true,
+                    'allow_empty' => false,
+                    'continue_if_empty' => false,
+                ],
             ],
         ];
     }

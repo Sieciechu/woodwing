@@ -11,6 +11,12 @@ class CalculateDistanceHandlerFactory
 {
     public function __invoke(ContainerInterface $container) : CalculateDistanceHandler
     {
-        return new CalculateDistanceHandler($container->get(Calculator::class));
+        // Retrieve the InputFilterManager
+        $filters = $container->get('InputFilterManager');
+
+        return new CalculateDistanceHandler(
+            $container->get(Calculator::class),
+            $filters->get('queryDistanceCalculator')
+        );
     }
 }

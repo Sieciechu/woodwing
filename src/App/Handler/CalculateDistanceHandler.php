@@ -7,10 +7,13 @@ namespace App\Handler;
 use App\Service\DistanceCalculator\Calculator;
 use App\Service\DistanceCalculator\Distance;
 use App\Service\DistanceCalculator\Unit;
+use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\JsonResponse;
+use Zend\InputFilter\Input;
+use Zend\InputFilter\InputFilter;
 
 class CalculateDistanceHandler implements RequestHandlerInterface
 {
@@ -19,15 +22,27 @@ class CalculateDistanceHandler implements RequestHandlerInterface
     /** @var Calculator */
     private $calculator;
 
-    public function __construct(Calculator $calculator)
+    /** @var InputFilter */
+    private $requestValidator;
+
+    public function __construct(Calculator $calculator, InputFilter $requestValidator)
     {
         $this->calculator = $calculator;
+        $this->requestValidator = $requestValidator;
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        $targetUnit = $request->getQueryParams()['targetUnit'];
 
+        $this->requestValidator->setData($request->getQueryParams());
+        if (!$this->requestValidator->isValid()) {
+            return new JsonResponse(
+                ['error'=>$this->requestValidator->getMessages()],
+                StatusCodeInterface::STATUS_UNPROCESSABLE_ENTITY
+            );
+        }
+
+        $targetUnit = $request->getQueryParams()['targetUnit'];
         $query = $request->getQueryParams()['query'];
         $distances = $this->convertQueryToDistances($query);
 
