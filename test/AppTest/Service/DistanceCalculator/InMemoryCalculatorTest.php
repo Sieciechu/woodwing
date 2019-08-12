@@ -37,8 +37,48 @@ class InMemoryCalculatorTest extends TestCase
             Distance::createFromMeters(3.0)
         ];
 
+        $basicYardCase = [
+            Distance::createFromYards(1.0),
+            Distance::createFromYards(2.0),
+            Unit::yard(),
+            Distance::createFromYards(3.0)
+        ];
+
+        $mixedUnitsCase1 = [
+            Distance::createFromMeters(1.0),
+            Distance::createFromYards(2.0),
+            Unit::meter(),
+            Distance::createFromMeters(2.8288)
+        ];
+
+        $mixedUnitsCase2 = [
+            Distance::createFromMeters(1.0),
+            Distance::createFromYards(2.0),
+            Unit::yard(),
+            Distance::createFromYards(3.0936133)
+        ];
+
+        $mixedUnitsCase3 = [
+            Distance::createFromMeters(1.0),
+            Distance::createFromMeters(2.0),
+            Unit::yard(),
+            Distance::createFromYards(3.2808399)
+        ];
+
+        $mixedUnitsCase4 = [
+            Distance::createFromYards(1.0),
+            Distance::createFromYards(2.0),
+            Unit::meter(),
+            Distance::createFromMeters(2.7432)
+        ];
+
         return [
             $basicCase,
+            $basicYardCase,
+            $mixedUnitsCase1,
+            $mixedUnitsCase2,
+            $mixedUnitsCase3,
+            $mixedUnitsCase4,
         ];
     }
 }
